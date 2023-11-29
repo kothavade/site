@@ -4,7 +4,6 @@ import mdx from '@astrojs/mdx'
 import solidJs from '@astrojs/solid-js'
 import sitemap from '@astrojs/sitemap'
 import unocss from 'unocss/astro'
-import vercel from '@astrojs/vercel/serverless'
 import vesper from './src/lib/vesper.json'
 
 // https://astro.build/config
@@ -20,13 +19,4 @@ export default defineConfig({
       wrap: true,
     },
   },
-  output: 'server',
-  adapter: vercel({
-    webAnalytics: {
-      enabled: true,
-    },
-    speedInsights: {
-      enabled: true,
-    },
-  }),
 })
