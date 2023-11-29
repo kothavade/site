@@ -10,7 +10,7 @@
     "astro": "astro",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format:content": "npx prettier --write ./src/content/posts"
+    "format:content": "bunx prettier --write ./src/content/posts"
   },
   "trustedDependencies": [
     "sharp"
