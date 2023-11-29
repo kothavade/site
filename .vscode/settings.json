@@ -26,6 +26,10 @@
     "editor.defaultFormatter": "astro-build.astro-vscode"
   },
   "cSpell.words": [
-    "antfu"
+    "antfu",
+    "astro",
+    "astrojs",
+    "shiki",
+    "unocss"
   ]
 }

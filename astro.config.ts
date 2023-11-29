@@ -4,6 +4,7 @@ import mdx from '@astrojs/mdx'
 import solidJs from '@astrojs/solid-js'
 import sitemap from '@astrojs/sitemap'
 import unocss from 'unocss/astro'
+import vercel from '@astrojs/vercel/serverless'
 import vesper from './src/lib/vesper.json'
 
 // https://astro.build/config
@@ -12,12 +13,20 @@ export default defineConfig({
   integrations: [mdx(), sitemap(), solidJs(), unocss({
     injectReset: true,
   }), vue()],
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   markdown: {
     shikiConfig: {
-    // @ts-expect-error
+      // @ts-expect-error theme is weird
       theme: vesper,
       wrap: true,
     },
   },
+  output: 'server',
+  adapter: vercel({
+    webAnalytics: {
+      enabled: true,
+    },
+    speedInsights: {
+      enabled: true,
+    },
+  }),
 })
