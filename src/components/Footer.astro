@@ -1,5 +1,5 @@
 ---
-import Link from "./Link.vue";
+import Link from './Link.vue';
 ---
 
 <div class="prose mt-6">
@@ -33,47 +33,47 @@ import Link from "./Link.vue";
 </div>
 
 <script>
-  const startTime = new Date();
-  const startS = startTime.getSeconds();
-  const startM = startTime.getMinutes() * 60 + startS;
-  const startH = (startTime.getHours() % 12) * 3600 + startM;
+const startTime = new Date()
+const startS = startTime.getSeconds()
+const startM = startTime.getMinutes() * 60 + startS
+const startH = (startTime.getHours() % 12) * 3600 + startM
 
-  refreshClock();
+refreshClock()
 
-  // compute the rotation amount relative to the starting time
-  function refreshClock() {
-    const now = new Date();
-    let diff = timeDifference(startTime, now);
-    let degS = ((startS + diff) / 60) * 360;
-    let degM = ((startM + diff) / 3600) * 360;
-    let degH = ((startH + diff) / 43200) * 360;
+// compute the rotation amount relative to the starting time
+function refreshClock() {
+  const now = new Date()
+  const diff = timeDifference(startTime, now)
+  const degS = ((startS + diff) / 60) * 360
+  const degM = ((startM + diff) / 3600) * 360
+  const degH = ((startH + diff) / 43200) * 360
 
-    const hourElement = document.querySelector(".hour") as HTMLElement;
-    const minuteElement = document.querySelector(".minute") as HTMLElement;
-    const secondElement = document.querySelector(".second") as HTMLElement;
+  const hourElement = document.querySelector('.hour') as HTMLElement
+  const minuteElement = document.querySelector('.minute') as HTMLElement
+  const secondElement = document.querySelector('.second') as HTMLElement
 
-    hourElement.style.transform = rotate(degH).transform;
-    minuteElement.style.transform = rotate(degM).transform;
-    secondElement.style.transform = rotate(degS).transform;
+  hourElement.style.transform = rotate(degH).transform
+  minuteElement.style.transform = rotate(degM).transform
+  secondElement.style.transform = rotate(degS).transform
 
-    setTimeout(refreshClock, 1000);
+  setTimeout(refreshClock, 1000)
+}
+
+// compute the time difference between two date objects (in seconds)
+function timeDifference(date1: Date, date2: Date) {
+  return Math.round(Math.abs(date2.getTime() - date1.getTime()) / 1000)
+}
+
+// returns the cross-browser css rotation properties
+function rotate(deg: number) {
+  return {
+    '-webkit-transform': `rotate(${deg}deg)`,
+    '-moz-transform': `rotate(${deg}deg)`,
+    '-ms-transform': `rotate(${deg}deg)`,
+    '-o-transform': `rotate(${deg}deg)`,
+    'transform': `rotate(${deg}deg)`,
   }
-
-  // compute the time difference between two date objects (in seconds)
-  function timeDifference(date1: Date, date2: Date) {
-    return Math.round(Math.abs(date2.getTime() - date1.getTime()) / 1000);
-  }
-
-  // returns the cross-browser css rotation properties
-  function rotate(deg: number) {
-    return {
-      "-webkit-transform": "rotate(" + deg + "deg)",
-      "-moz-transform": "rotate(" + deg + "deg)",
-      "-ms-transform": "rotate(" + deg + "deg)",
-      "-o-transform": "rotate(" + deg + "deg)",
-      transform: "rotate(" + deg + "deg)",
-    };
-  }
+}
 </script>
 
 <style>

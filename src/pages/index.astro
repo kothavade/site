@@ -1,19 +1,19 @@
 ---
-import { getCollection } from "astro:content";
-import { sortPostsByDate } from "@lib/date";
-import Link from "@components/Link.vue";
-import Base from "@layouts/Base.astro";
-import Project from "@components/Project.astro";
-import PostRow from "@components/PostRow.astro";
-import { getProjects } from "@lib/projects";
-import ArrowLink from "@components/ArrowLink.vue";
+import { getCollection } from 'astro:content'
+import { sortPostsByDate } from '@lib/date'
+import Link from '@components/Link.vue'
+import Base from '@layouts/Base.astro'
+import Project from '@components/Project.astro'
+import PostRow from '@components/PostRow.astro'
+import { getProjects } from '@lib/projects'
+import ArrowLink from '@components/ArrowLink.vue'
 
-const projects = await getProjects();
+const projects = await getProjects()
 const posts = sortPostsByDate(
-  await getCollection("posts", ({ data }) => data.isDraft !== true)
-).slice(0, 4);
+  await getCollection('posts', ({ data }) => data.isDraft !== true),
+).slice(0, 4)
 
-const title = "Ved Kothavade";
+const title = 'Ved Kothavade';
 ---
 
 <Base {title} description="Ved Kothavade's personal website">
@@ -45,12 +45,12 @@ const title = "Ved Kothavade";
       </span>
     </h2>
     <div class="grid gap-4 grid-cols-2 md:grid-cols-3">
-      {projects.map((project) => <Project {project} />)}
+      {projects.map(project => <Project {project} />)}
     </div>
 
     <h2 class="mt-12 mb-2!">Posts</h2>
     <div class="flex flex-col gap-4">
-      {posts.map((post) => <PostRow {post} />)}
+      {posts.map(post => <PostRow {post} />)}
       <span>
         <ArrowLink href="/posts">All posts</ArrowLink>
       </span>

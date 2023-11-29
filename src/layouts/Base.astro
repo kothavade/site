@@ -1,27 +1,32 @@
 ---
-import { ViewTransitions } from "astro:transitions";
-import Footer from "@components/Footer.astro";
-import Grain from "@components/grain/Grain.astro";
-import { fade } from "astro:transitions";
-import ArrowLink from "@components/ArrowLink.vue";
+import { ViewTransitions, fade } from 'astro:transitions'
+import Footer from '@components/Footer.astro'
+import Grain from '@components/grain/Grain.astro'
+import ArrowLink from '@components/ArrowLink.vue'
 
 type Props = {
-  title: string;
-  description: string;
-};
+  title: string
+  description: string
+}
 
-const { title, description } = Astro.props;
-const { pathname } = Astro.url;
+const { title, description } = Astro.props
+const { pathname } = Astro.url
 
-let href;
-if (pathname === "/posts" || pathname === "/posts/") href = "/";
-else if (pathname.startsWith("/posts/")) href = "/posts";
-else href = "/";
+let href
+if (pathname === '/posts' || pathname === '/posts/')
+  href = '/'
+else if (pathname.startsWith('/posts/'))
+  href = '/posts'
+else href = '/';
+
+// back string is "home" if on "/posts" or "/posts/"
+// if on "/posts/<post-slug>" then back string is "posts"
+let back = pathname === '/posts' || pathname === '/posts/' ? 'home' : 'posts'
 ---
 
 <html lang="en">
   <head>
-    <ViewTransitions transition:animate={fade({ duration: "0.2s" })} />
+    <ViewTransitions transition:animate={fade({ duration: '0.2s' })} />
 
     <!-- global metadata -->
     <meta charset="utf-8" />
@@ -65,7 +70,7 @@ else href = "/";
         class="h-37.5px flex items-center justify-between -mt-2 slide-enter-content"
       >
         <slot name="header-content">
-          <ArrowLink {href} back>back</ArrowLink>
+          <ArrowLink {href} back>{back}</ArrowLink>
         </slot>
       </header>
 
@@ -133,7 +138,7 @@ else href = "/";
 
       .prose {
         @apply max-w-container [&>:not(:last-child)]:mb-6;
-        
+
         & p,
         & ol,
         & ul {

@@ -8,7 +8,7 @@ const isExternal = computed(() => props.href.startsWith('http'))
 
 <template>
   <div class="inline-flex items-center">
-    <div v-if="props.back"  class="i-radix-icons:arrow-top-left text-neutral-500 text-md mr-.5" />
+    <div v-if="props.back" class="i-radix-icons:arrow-top-left text-neutral-500 text-md mr-.5" />
     <a
       :href="props.href" :target="isExternal ? '_blank' : '_self'"
       class="underline decoration-neutral-600 underline-offset-4 transition-colors focus:(decoration-neutral-500 outline-offset-6) hover:decoration-neutral-500"
