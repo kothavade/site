@@ -17,11 +17,11 @@ if (pathname === '/posts' || pathname === '/posts/')
   href = '/'
 else if (pathname.startsWith('/posts/'))
   href = '/posts'
-else href = '/';
+else href = '/'
 
 // back string is "home" if on "/posts" or "/posts/"
 // if on "/posts/<post-slug>" then back string is "posts"
-let back = pathname === '/posts' || pathname === '/posts/' ? 'home' : 'posts'
+const back = pathname === '/posts' || pathname === '/posts/' ? 'home' : 'posts'
 ---
 
 <html lang="en">
@@ -79,198 +79,207 @@ let back = pathname === '/posts' || pathname === '/posts/' ? 'home' : 'posts'
       <Grain opacity={0.3} />
     </div>
     <Footer class="mt-auto" transition:persist />
-    <style is:global>
-      @font-face {
-        font-family: "Switzer";
-        src: url("/fonts/Switzer.woff2") format("woff2");
-        font-weight: 300 900;
-        font-style: normal;
-        font-display: swap;
-      }
-
-      @font-face {
-        font-family: "Switzer Fallback";
-        src: local("BlinkMacSystemFont"), local("Segoe UI"),
-          local("Helvetica Neue"), local("Arial"), local("sans-serif");
-        font-weight: 300 900;
-        font-style: normal;
-        ascent-override: 96.67%;
-        descent-override: 24.66%;
-        line-gap-override: 8.88%;
-        size-adjust: 101.38%;
-      }
-
-      @font-face {
-        font-family: "Hack";
-        src: url("/fonts/Hack.woff2") format("woff2");
-        font-weight: 400;
-        font-display: swap;
-        font-style: normal;
-      }
-
-      body,
-      html {
-        @apply overflow-x-hidden;
-      }
-
-      html {
-        @apply antialiased touch-manipulation scroll-smooth text-base;
-        text-rendering: optimizeLegibility;
-
-        &.dark {
-          color-scheme: dark;
-        }
-      }
-
-      * {
-        @apply outline-white selection-(bg-neutral-700 text-white);
-      }
-
-      body {
-        font-family: "Switzer", "Switzer Fallback";
-        @apply text-neutral-300 bg-neutral-900 px-0 md:px-4 py-4 md:py-8 relative min-h-screen text-sm md:text-base;
-      }
-
-      code,
-      pre {
-        font-family: "Hack", "Courier New", Courier, monospace;
-      }
-
-      .prose {
-        @apply max-w-container [&>:not(:last-child)]:mb-6;
-
-        & p,
-        & ol,
-        & ul {
-          @apply my-6 line-height-7.2;
-        }
-
-        & h1,
-        & h2,
-        & h3 {
-          @apply text-neutral-100 font-semibold my-8;
-        }
-
-        & h1 {
-          @apply text-2xl;
-        }
-
-        & h2 {
-          @apply text-xl;
-        }
-
-        & h3 {
-          @apply text-lg;
-        }
-
-        & strong {
-          @apply font-medium text-neutral-100;
-        }
-
-        & hr {
-          @apply border-neutral-800 border-b-0.1;
-        }
-
-        & ul {
-          @apply list-disc list-outside pl-4;
-        }
-
-        & ul > li {
-          @apply mb-2;
-        }
-
-        & img {
-          @apply mx-auto rounded my-6;
-        }
-      }
-      @keyframes slide-enter {
-        0% {
-          transform: translateY(10px);
-          opacity: 0;
-        }
-
-        to {
-          transform: translateY(0);
-          opacity: 100;
-        }
-      }
-
-      @media (prefers-reduced-motion: no-preference) {
-        html:not(.no-sliding) [slide-enter],
-        html:not(.no-sliding) .slide-enter,
-        html:not(.no-sliding)
-          .slide-enter-content
-          > *:not(:has(.table-of-contents)) {
-          --enter-stage: 0;
-          --enter-step: 90ms;
-          --enter-initial: 0ms;
-          animation: slide-enter 1s both 1;
-          animation-delay: calc(
-            var(--enter-initial) + var(--enter-stage) * var(--enter-step)
-          );
-        }
-
-        .slide-enter-content > *:nth-child(1) {
-          --enter-stage: 1 !important;
-        }
-        .slide-enter-content > *:nth-child(2) {
-          --enter-stage: 2 !important;
-        }
-        .slide-enter-content > *:nth-child(3) {
-          --enter-stage: 3 !important;
-        }
-        .slide-enter-content > *:nth-child(4) {
-          --enter-stage: 4 !important;
-        }
-        .slide-enter-content > *:nth-child(5) {
-          --enter-stage: 5 !important;
-        }
-        .slide-enter-content > *:nth-child(6) {
-          --enter-stage: 6 !important;
-        }
-        .slide-enter-content > *:nth-child(7) {
-          --enter-stage: 7 !important;
-        }
-        .slide-enter-content > *:nth-child(8) {
-          --enter-stage: 8 !important;
-        }
-        .slide-enter-content > *:nth-child(9) {
-          --enter-stage: 9 !important;
-        }
-        .slide-enter-content > *:nth-child(10) {
-          --enter-stage: 10 !important;
-        }
-        .slide-enter-content > *:nth-child(11) {
-          --enter-stage: 11 !important;
-        }
-        .slide-enter-content > *:nth-child(12) {
-          --enter-stage: 12 !important;
-        }
-        .slide-enter-content > *:nth-child(13) {
-          --enter-stage: 13 !important;
-        }
-        .slide-enter-content > *:nth-child(14) {
-          --enter-stage: 14 !important;
-        }
-        .slide-enter-content > *:nth-child(15) {
-          --enter-stage: 15 !important;
-        }
-        .slide-enter-content > *:nth-child(16) {
-          --enter-stage: 16 !important;
-        }
-        .slide-enter-content > *:nth-child(17) {
-          --enter-stage: 17 !important;
-        }
-        .slide-enter-content > *:nth-child(18) {
-          --enter-stage: 18 !important;
-        }
-        .slide-enter-content > *:nth-child(19) {
-          --enter-stage: 19 !important;
-        }
-        .slide-enter-content > *:nth-child(20) {
-          --enter-stage: 20 !important;
-        }
-      }
-    </style>
   </body>
 </html>
+
+<script>
+import { loglib } from "@loglib/tracker"
+
+loglib.record({
+  id: "kothavade",
+})
+</script>
+
+<style is:global>
+  @font-face {
+    font-family: "Switzer";
+    src: url("/fonts/Switzer.woff2") format("woff2");
+    font-weight: 300 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Switzer Fallback";
+    src: local("BlinkMacSystemFont"), local("Segoe UI"),
+      local("Helvetica Neue"), local("Arial"), local("sans-serif");
+    font-weight: 300 900;
+    font-style: normal;
+    ascent-override: 96.67%;
+    descent-override: 24.66%;
+    line-gap-override: 8.88%;
+    size-adjust: 101.38%;
+  }
+
+  @font-face {
+    font-family: "Hack";
+    src: url("/fonts/Hack.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+  }
+
+  body,
+  html {
+    @apply overflow-x-hidden;
+  }
+
+  html {
+    @apply antialiased touch-manipulation scroll-smooth text-base;
+    text-rendering: optimizeLegibility;
+
+    &.dark {
+      color-scheme: dark;
+    }
+  }
+
+  * {
+    @apply outline-white selection-(bg-neutral-700 text-white);
+  }
+
+  body {
+    font-family: "Switzer", "Switzer Fallback";
+    @apply text-neutral-300 bg-neutral-900 px-0 md:px-4 py-4 md:py-8 relative min-h-screen text-sm md:text-base;
+  }
+
+  code,
+  pre {
+    font-family: "Hack", "Courier New", Courier, monospace;
+  }
+
+  .prose {
+    @apply max-w-container [&>:not(:last-child)]:mb-6;
+
+    & p,
+    & ol,
+    & ul {
+      @apply my-6 line-height-7.2;
+    }
+
+    & h1,
+    & h2,
+    & h3 {
+      @apply text-neutral-100 font-semibold my-8;
+    }
+
+    & h1 {
+      @apply text-2xl;
+    }
+
+    & h2 {
+      @apply text-xl;
+    }
+
+    & h3 {
+      @apply text-lg;
+    }
+
+    & strong {
+      @apply font-medium text-neutral-100;
+    }
+
+    & hr {
+      @apply border-neutral-800 border-b-0.1;
+    }
+
+    & ul {
+      @apply list-disc list-outside pl-4;
+    }
+
+    & ul > li {
+      @apply mb-2;
+    }
+
+    & img {
+      @apply mx-auto rounded my-6;
+    }
+  }
+  @keyframes slide-enter {
+    0% {
+      transform: translateY(10px);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateY(0);
+      opacity: 100;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html:not(.no-sliding) [slide-enter],
+    html:not(.no-sliding) .slide-enter,
+    html:not(.no-sliding)
+      .slide-enter-content
+      > *:not(:has(.table-of-contents)) {
+      --enter-stage: 0;
+      --enter-step: 90ms;
+      --enter-initial: 0ms;
+      animation: slide-enter 1s both 1;
+      animation-delay: calc(
+        var(--enter-initial) + var(--enter-stage) * var(--enter-step)
+      );
+    }
+
+    .slide-enter-content > *:nth-child(1) {
+      --enter-stage: 1 !important;
+    }
+    .slide-enter-content > *:nth-child(2) {
+      --enter-stage: 2 !important;
+    }
+    .slide-enter-content > *:nth-child(3) {
+      --enter-stage: 3 !important;
+    }
+    .slide-enter-content > *:nth-child(4) {
+      --enter-stage: 4 !important;
+    }
+    .slide-enter-content > *:nth-child(5) {
+      --enter-stage: 5 !important;
+    }
+    .slide-enter-content > *:nth-child(6) {
+      --enter-stage: 6 !important;
+    }
+    .slide-enter-content > *:nth-child(7) {
+      --enter-stage: 7 !important;
+    }
+    .slide-enter-content > *:nth-child(8) {
+      --enter-stage: 8 !important;
+    }
+    .slide-enter-content > *:nth-child(9) {
+      --enter-stage: 9 !important;
+    }
+    .slide-enter-content > *:nth-child(10) {
+      --enter-stage: 10 !important;
+    }
+    .slide-enter-content > *:nth-child(11) {
+      --enter-stage: 11 !important;
+    }
+    .slide-enter-content > *:nth-child(12) {
+      --enter-stage: 12 !important;
+    }
+    .slide-enter-content > *:nth-child(13) {
+      --enter-stage: 13 !important;
+    }
+    .slide-enter-content > *:nth-child(14) {
+      --enter-stage: 14 !important;
+    }
+    .slide-enter-content > *:nth-child(15) {
+      --enter-stage: 15 !important;
+    }
+    .slide-enter-content > *:nth-child(16) {
+      --enter-stage: 16 !important;
+    }
+    .slide-enter-content > *:nth-child(17) {
+      --enter-stage: 17 !important;
+    }
+    .slide-enter-content > *:nth-child(18) {
+      --enter-stage: 18 !important;
+    }
+    .slide-enter-content > *:nth-child(19) {
+      --enter-stage: 19 !important;
+    }
+    .slide-enter-content > *:nth-child(20) {
+      --enter-stage: 20 !important;
+    }
+  }
+</style>
