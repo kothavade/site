@@ -1,8 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import PostPreview from "@components/PostPreview.astro";
-import { sortPostsByDate } from "../../lib/date";
-import Base from "../../layouts/Base.astro";
+import { sortPostsByDate } from "@lib/date";
+import Base from "@layouts/Base.astro";
 
 const posts = sortPostsByDate(
   await getCollection("posts", ({ data }) => data.isDraft !== true)
