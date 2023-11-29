@@ -3,7 +3,7 @@ import { computed } from 'vue'
 
 const props = defineProps<{ href: string }>()
 
-const isExternal = computed(() => props.href.startsWith('http'))
+const isExternal = computed(() => props.href.startsWith('http') || props.href.includes('kothavade.com/gh'))
 </script>
 
 <template>
