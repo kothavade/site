@@ -12,32 +12,32 @@ export async function getProjects(): Promise<Project[]> {
   return [
     {
       name: 'CodeSense',
-      link: 'https://github.com/kothavade/CodeSense',
+      link: 'https://kothavade.com/gh/CodeSense',
       description: 'Next.js language-agnostic semantic code search engine.',
     },
     {
       name: 'kothavade.com',
-      link: 'https://github.com/kothavade/site',
+      link: 'https://kothavade.com/gh/site',
       description: 'Personal website built with Astro, Vue and SolidJS',
     },
     {
       name: 'LectureAI',
-      link: 'https://github.com/kothavade/LectureAI',
+      link: 'https://kothavade.com/gh/LectureAI',
       description: 'React/FastAPI lecture player, transcriber, and summarizer.',
     },
     {
       name: 'chip8-rs',
-      link: 'https://github.com/kothavade/chip8-rs',
+      link: 'https://kothavade.com/gh/chip8-rs',
       description: 'CHIP-8 emulator written in Rust.',
     },
     {
       name: 'frostbite',
-      link: 'https://github.com/kothavade/frostbite',
+      link: 'https://kothavade.com/gh/frostbite',
       description: 'Nix configuration for macOS/Linux.',
     },
     {
       name: 'FireMessage',
-      link: 'https://github.com/kothavade/FireMessage',
+      link: 'https://kothavade.com/gh/FireMessage',
       description: 'Multi-platform Flutter chat app with Firebase backend.',
     },
   ]
