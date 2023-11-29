@@ -1,0 +1,35 @@
+{
+  "headers": [
+    {
+      "source": "/:all*(ttf|otf|woff|woff2)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/gh",
+      "destination": "https://github.com/kothavade",
+      "permanent": true
+    },
+    {
+      "source": "/gh/:slug*",
+      "destination": "https://github.com/kothavade/:slug*",
+      "permanent": true
+    },
+    {
+      "source": "/srht",
+      "destination": "https://sr.ht/~ved",
+      "permanent": true
+    },
+    {
+      "source": "/linkedin",
+      "destination": "https://www.linkedin.com/in/kothavade/",
+      "permanent": true
+    }
+  ]
+}

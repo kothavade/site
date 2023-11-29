@@ -1,0 +1,90 @@
+---
+title: "How I use Nix"
+description: "Using Nix for system configuration and development"
+date: "2023-9-17"
+---
+
+import Link from "@components/Link.vue"
+import Code from "@components/Code.vue"
+import { createHeading } from "@components/Heading"
+
+export const components = {
+  a: Link,
+  code: Code,
+  h1: createHeading("h1"),
+  h2: createHeading("h2"),
+  h3: createHeading("h3"),
+}
+
+---
+
+First, here's my main Nix repository: [kothavade/frostbite](https://github.com/kothavade/frostbite)
+
+## Whats in the repo?
+
+My full system configurations for both my Linux desktop and my Macbook Pro.
+
+This includes everything from things such as touchpad swipe direction or DNS, which are baked into the OS settings, to shell configuration, to even the configuration of packages installed such as VSCode.
+
+## What is Nix?
+
+Nix is three things--a language, a package manager, and an operating system.
+In this project, I use all three, so the wording can get confusing, but I'll try to be clear.
+
+1. Nix, [the language](https://nixos.org/manual/nix/unstable/language/index.html), is a functional programming language with a focus on purity, making it uniquely suited to declarative configuration and package management.
+2. Nix, [the package manager](https://search.nixos.org/packages), is a massive package repository (it has over 80,000 packages), where each package is defined using the Nix language. It is special, because it keeps track of _every single dependeny_ of the package, what _specific version_ of those dependencies were used, and what _specific version_ of the package was installed.
+   This is magical because you can never have dependency conflicts, as each package is installed in its own isolated environment, which means you can have multiple versions of the same package installed at the same time.
+3. Nix, [the operating system](https://nixos.org/), is a Linux distribution that uses the Nix package manager to manage the entire operating system. This means that the entire operating system is defined using the Nix language, and is therefore declarative, reproducible, and portable.
+   - What is means for an operating system to be "configured" with Nix is that the configuration for every single program installed in the system is written in Nix, and the Nix package manager is used to install those programs.
+     Further, the list of user installed packages are tracked in the same hardcoded configuration, which means that your entire system can be checked into a Git repo and you can be sure that you can reproduce the exact same system on any other machine.
+
+## How I use Nix
+
+Hopefully, you can see why Nix is attractive.
+For my own uses, I use Nix to manage a cross-platform development environment that works on all my devices.
+With a single command, every program I used is installed, configured, and ready to go, and if I make a change on one system, the other can be synced with a single command.
+
+I also use a feature of Nix called `devshells`, which, as you might guess from the name, allow you to write a shell enviornment for a given project in Nix.
+For example, for this very website, my `flake.nix` (which defines the devshell) is the following:
+
+```nix
+{
+  description = "kothavade.com";
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  };
+
+  outputs = {
+    self,
+    nixpkgs,
+  }: let
+    allSystems = [
+      "x86_64-linux"
+      "aarch64-linux"
+      "x86_64-darwin"
+      "aarch64-darwin"
+    ];
+
+    forAllSystems = f:
+      nixpkgs.lib.genAttrs allSystems (system:
+        f {
+          pkgs = import nixpkgs {inherit system;};
+        });
+  in {
+    devShells = forAllSystems ({pkgs}: {
+      default = pkgs.mkShell {
+        packages = with pkgs; [
+          nodejs_18
+          nodePackages.pnpm
+        ];
+      };
+    });
+  };
+}
+```
+
+This might look daunting, but all it is doing is importing the `nixpkgs` repository, defining the operating systems that are supported by this flake, and then defining a `devShell` for each of those systems.
+In the `devshell`, I describe the specific packages that I need for this project, which in this case are just `nodejs` and `pnpm`.
+
+Say, tomorrow, Node 18 LTS introduces a breaking change (unlikely, this is just for illustrative purposes)--I will never even know, as the packages defined in the flake are _pinned_ to a specific version by the `flake.lock` lockfile.

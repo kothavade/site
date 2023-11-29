@@ -1,0 +1,17 @@
+---
+import type { Project } from "../lib/projects"
+import ArrowLink from "./ArrowLink.vue"
+
+type Props = {
+  project: Project
+}
+
+const { project: { name, description, link } } = Astro.props
+---
+
+<div class="w-20.6666666666666666666666666666666666666666666666667ch flex flex-col">
+  <ArrowLink href={link}>
+    <span class="font-medium">{name}</span>
+  </ArrowLink>
+  <span class="pt-2 text-neutral-400 text-balance">{description}</span>
+</div>

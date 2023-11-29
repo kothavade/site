@@ -1,0 +1,90 @@
+---
+title: "Why CodeSense?"
+description: "Why I built CodeSense, and how it can help you."
+date: "2023-11-02"
+---
+import Link from "@components/Link.vue"
+import Code from "@components/Code.vue"
+import { createHeading } from "@components/Heading"
+
+export const components = {
+  a: Link,
+  code: Code,
+  h1: createHeading("h1"),
+  h2: createHeading("h2"),
+  h3: createHeading("h3"),
+}
+
+![CodeSense](@images/codesense.png)
+
+CodeSense is a language agnostic code search engine built with SolidJS.
+It is inspired by [Hoogle](https://hoogle.haskell.org/), a Haskell code search engine.
+
+If you're interested in seeing the code after reading this, the repo can be found at: [kothavade/CodeSense](https://github.com/kothavade/CodeSense)
+
+## Purpose
+
+Oftentimes I find that I know what I want from a library, but don't know what it's called.
+For example, take [Raylib](https://www.raylib.com/), a popular game development library written in C.
+
+It provides a helpful function called `ColorAlpha`, which is rather aptly named and allows you to set the alpha value of a color.
+However, as a new user, I don't know that--I might be thinking in terms of "transparency" or "opacity", and waste time fruitlessly grepping the codebase or <kbd>⌘F</kbd> ing the documentation.
+What I do know, though, is that the function I want will likely consume a `Color` and a `float`, and return a `Color`--so why not search for that?
+
+This tool allows you complete the above search with something as simple as `Color, Float -> Color`
+
+## How it works
+
+With CodeSense, you can still search for functions by name, so no need to forget your grepping instincts.
+But, if you're looking for something more powerful, use the [Tree-Sitter](https://tree-sitter.github.io/tree-sitter/) powered semantic search, which allows you to search for functions by their function signature/protoype.
+
+This works by compiling the Tree-Sitter C library, along with the "grammars" for every supported language, to WebAssembly.
+Then, `queries`, which are essentially hand-written Lisp S-expressions that describe the AST nodes I'm looking for, are run against ASTs Tree-Sitter generates for source code to build an index.
+When you search, I run your search against the index, and show you the results.
+
+### Example Query
+
+    <details>
+          <summary>This is the query used for Rust code</summary>
+
+```lisp
+(function_item
+	name: (identifier) @function_name
+    parameters: (parameters
+        (
+            (parameter
+                type: (_) @parameter_type
+            )
+            ","?
+        )*
+    )
+    return_type: (_) @return_type
+) @function_body
+```
+
+The `@xyz` syntax represents capture groups, which are used to extract relevant information from the AST.
+
+    </details>
+
+## How to use
+
+1. Go to [CodeSense](https://codesense.kothavade.com)
+2. Type in a function name, or a function signature
+
+   * For the example above, you could type in `ColorAlpha` (string-based search), or `Color, Float -> Color` (meaning-based search)
+3. You will see a list of matching functions, and you can expand any of them so see their full source code
+
+## Supported Languages
+
+At the moment, CodeSense supports the following languages:
+
+* C
+* Rust
+
+It is trivial to add more languages (I just have to write the queries), so if you'd like to see a language added, please open an issue!
+The GitHub repo can be found in the header.
+
+## Tech
+
+If you want to learn more about the tech used for this, the [README](https://github.com/kothavade/CodeSense#readme) has more information.
+

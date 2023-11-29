@@ -1,0 +1,21 @@
+---
+import { getCollection } from "astro:content";
+import PostPreview from "@components/PostPreview.astro";
+import { sortPostsByDate } from "../../lib/date";
+import Base from "../../layouts/Base.astro";
+
+const posts = sortPostsByDate(
+  await getCollection("posts", ({ data }) => data.isDraft !== true)
+);
+
+const title = "Posts";
+---
+
+<Base {title} description="Things I've written.">
+  <main class="prose slide-enter-content">
+    <h1>Posts</h1>
+    <div class="my-8! flex flex-col gap-12">
+      {posts.map((post) => <PostPreview {post} />)}
+    </div>
+  </main>
+</Base>
