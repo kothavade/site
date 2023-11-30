@@ -3,6 +3,7 @@ import { ViewTransitions, fade } from 'astro:transitions'
 import Footer from '@components/Footer.astro'
 import Grain from '@components/grain/Grain.astro'
 import ArrowLink from '@components/ArrowLink.vue'
+import Link from '@components/Link.vue'
 
 type Props = {
   title: string
@@ -12,21 +13,14 @@ type Props = {
 const { title, description } = Astro.props
 const { pathname } = Astro.url
 
-let href
-if (pathname === '/posts' || pathname === '/posts/')
-  href = '/'
-else if (pathname.startsWith('/posts/'))
-  href = '/posts'
-else href = '/'
-
-// back string is "home" if on "/posts" or "/posts/"
-// if on "/posts/<post-slug>" then back string is "posts"
-const back = pathname === '/posts' || pathname === '/posts/' ? 'home' : 'posts'
+type Location = "home" | "posts" | "post"
+const location: Location = pathname.startsWith('/posts/') ? 'post' : pathname === '/posts' || pathname === '/posts/' ? 'posts' : 'home'
+const post = pathname.split('/posts/')[1]
 ---
 
 <html lang="en">
   <head>
-    <ViewTransitions transition:animate={fade({ duration: '0.2s' })} />
+    <ViewTransitions transition:animate={fade({ duration: '0s' })} />
 
     <!-- global metadata -->
     <meta charset="utf-8" />
@@ -67,10 +61,20 @@ const back = pathname === '/posts' || pathname === '/posts/' ? 'home' : 'posts'
   <body class="flex flex-col min-h-screen mx-auto max-w-container px-4">
     <div class="flex-grow">
       <header
-        class="h-37.5px flex items-center justify-between -mt-2 slide-enter-content"
+        class="h-37.5px flex items-center justify-between -mt-2"
       >
         <slot name="header-content">
-          <ArrowLink {href} back>{back}</ArrowLink>
+          <div class="flex items-center">
+          <ArrowLink href="/" back={location !== 'home'}>home</ArrowLink>
+          {location === 'posts' && <span class="ml-1">/ posts</span>}
+          {location === 'post' && ( 
+            <div>
+              <span class="ml-1">/</span>
+              <Link href="/posts">posts</Link>
+              <span class="ml-.5">/ {post}</span>
+            </div>
+          )}
+          </div>
         </slot>
       </header>
 
@@ -83,10 +87,12 @@ const back = pathname === '/posts' || pathname === '/posts/' ? 'home' : 'posts'
 </html>
 
 <script>
+// for performance metrics
 import { loglib } from "@loglib/tracker"
-
+loglib.setConsent("granted")
 loglib.record({
   id: "kothavade",
+  autoTrack: true,
 })
 </script>
 
