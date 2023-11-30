@@ -41,19 +41,20 @@ const title = 'Ved Kothavade';
     <h2 class="header">
       Projects
       <span class="ml-1 text-sm text-neutral-500 font-normal">
-        <Link href="/gh">view all on GitHub</Link>
+        <ArrowLink href="/gh">view all on github</ArrowLink>
       </span>
     </h2>
     <div class="grid gap-4 grid-cols-2 md:grid-cols-3">
       {projects.map(project => <Project {project} />)}
     </div>
 
-    <h2 class="header">Posts</h2>
-    <div class="flex flex-col gap-4">
-      {posts.map(post => <PostRow {post} />)}
-      <span>
-        <ArrowLink href="/posts">All posts</ArrowLink>
+    <h2 class="header">Posts
+      <span class="ml-1 text-sm text-neutral-500 font-normal">
+        <ArrowLink href="/posts">all posts</ArrowLink>
       </span>
+    </h2>
+    <div class="flex flex-col mb-4">
+      {posts.map(post => <PostRow {post} />)}
     </div>
   </main>
 </Base>
