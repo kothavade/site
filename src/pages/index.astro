@@ -17,7 +17,7 @@ const title = 'Ved Kothavade';
 ---
 
 <Base {title} description="Ved Kothavade's personal website">
-  <h1 slot="header-content" class="font-medium mt-24 md:mt-48">Ved Kothavade</h1>
+  <h1 slot="header-content" class="font text-xl mt-24 md:mt-48 text-neutral-100">Ved Kothavade</h1>
 
   <main class="prose slide-enter-content pt-10 md:pt-24">
     <p>
@@ -38,7 +38,7 @@ const title = 'Ved Kothavade';
     </p>
     <p>If you'd like to contact me, you can find links in the footer.</p>
 
-    <h2 class="mt-12 mb-2!">
+    <h2 class="header">
       Projects
       <span class="ml-1 text-sm text-neutral-500 font-normal">
         <Link href="/gh">view all on GitHub</Link>
@@ -48,7 +48,7 @@ const title = 'Ved Kothavade';
       {projects.map(project => <Project {project} />)}
     </div>
 
-    <h2 class="mt-12 mb-2!">Posts</h2>
+    <h2 class="header">Posts</h2>
     <div class="flex flex-col gap-4">
       {posts.map(post => <PostRow {post} />)}
       <span>
@@ -57,3 +57,9 @@ const title = 'Ved Kothavade';
     </div>
   </main>
 </Base>
+
+<style>
+  .header {
+    @apply mt-12 mb-2! font-normal!
+  }
+</style>
