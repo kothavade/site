@@ -14,9 +14,11 @@ const {
   },
 } = Astro.props;
 ---
-<Link href={`/posts/${slug}`} hideUnderline>
-  <article class="flex justify-between hover:bg-neutral-800 p-2 rounded duration-200">
-    <span>{title}</span>
-    <span>{formatDate(date)}</span>
-  </article>
-</Link>
+<div class=" hover:bg-neutral-800 p-2 mx--2 rounded duration-200">
+  <Link href={`/posts/${slug}`} hideUnderline>
+    <article class="flex justify-between">
+      <span>{title}</span>
+      <span>{formatDate(date)}</span>
+    </article>
+  </Link>
+  </div>

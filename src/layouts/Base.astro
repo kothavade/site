@@ -14,8 +14,9 @@ const { title, description } = Astro.props
 const { pathname } = Astro.url
 
 type Location = "home" | "posts" | "post"
-const location: Location = pathname.startsWith('/posts/') ? 'post' : pathname === '/posts' || pathname === '/posts/' ? 'posts' : 'home'
-const post = pathname.split('/posts/')[1]
+const location: Location = pathname === '/posts' || pathname === '/posts/' ? 'posts' : pathname.startsWith('/posts/') ? 'post' : 'home'
+let post = pathname.split('/posts/')[1]
+if (post) post = post.replace(/\/$/, '');
 ---
 
 <html lang="en">
