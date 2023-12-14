@@ -1,5 +1,7 @@
 ---
 import { ViewTransitions, fade } from 'astro:transitions'
+// @ts-expect-error - no types yet
+import SpeedInsights from "@vercel/speed-insights/astro"
 import Footer from '@components/Footer.astro'
 import Grain from '@components/grain/Grain.astro'
 import ArrowLink from '@components/ArrowLink.vue'
@@ -57,6 +59,13 @@ if (post) post = post.replace(/\/$/, '');
       type="font/woff2"
       crossorigin="anonymous"
     />
+    <script is:inline>
+      function speedInsightsBeforeSend(data) {
+        return data;
+      }
+    </script>
+
+    <SpeedInsights />
   </head>
 
   <body class="flex flex-col min-h-screen mx-auto max-w-container px-4">

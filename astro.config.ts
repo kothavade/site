@@ -11,6 +11,7 @@ import vercel from "@astrojs/vercel/static";
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.kothavade.com',
+  prefetch: true,
   integrations: [mdx(), sitemap(), solidJs(), unocss({
     injectReset: true
   }), vue()],
@@ -26,8 +27,9 @@ export default defineConfig({
     webAnalytics: {
       enabled: true,
     },
-    speedInsights: {
-      enabled: true,
-    },
+    // FIXME: astro doesn't use the new @vercel/speed-insights, when it does revert
+    // speedInsights: {
+    //   enabled: true,
+    // },
   })
 });
