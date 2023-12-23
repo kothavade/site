@@ -1,0 +1,36 @@
+---
+title: "Home Manager Option Search"
+description: "A Web App to search for Home Manager's Configuration Options"
+date: "2023-12-22"
+---
+
+import Link from "@components/Link.vue"
+import Code from "@components/Code.vue"
+import { createHeading } from "@components/Heading"
+
+export const components = {
+  a: Link,
+  code: Code,
+  h1: createHeading("h1"),
+  h2: createHeading("h2"),
+  h3: createHeading("h3"),
+}
+
+![Home Manager Search](@images/hm-search.png)
+
+Home Manager Search is a tool which scrapes the [Home Manager manual](https://nix-community.github.io/home-manager/options.xhtml) and allows you to search for metadata from a generated index.
+
+For any given option, you can see see detailed information about it, including types, examples, default values, and more.
+
+![Home Manager Search Info](@images/hm-search-info.png)
+
+I wrote a bit about how I use Nix previously, and alluded to how it not only manages my system, but my home directory (in other words, my dotfiles), as well.
+
+This is done through a tool called [Home Manager](https://github.com/nix-community/home-manager), but the documentation for it is a bit lacking--it's thorough, but it's not very searchable.
+I wanted to be able to search for a particular option, and see what it does, and what it's default value is.
+
+So, I wrote a tool to do that. It's built with Next.js 14, styled with Tailwind (with help from [shadcn/ui](https://ui.shadcn.com)), and deployed to Vercel.
+
+A GitHub action scrapes the Home Manager manual nightly, so it should always reflect the latest update to Home Manager.
+
+You can check it out [here](https://hm-search.kothavade.com/), and the source code is [here](/gh/hm-search).

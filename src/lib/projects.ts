@@ -16,19 +16,24 @@ export async function getProjects(): Promise<Project[]> {
       description: 'Next.js language-agnostic semantic code search engine.',
     },
     {
-      name: 'kothavade.com',
-      link: 'https://kothavade.com/gh/site',
-      description: 'Personal website built with Astro, Vue and SolidJS',
+      name: 'Home Manager Search',
+      link: 'https://kothavade.com/gh/hm-search',
+      description: 'Search for Home Manager options.',
     },
+    {
+      name: 'CHIP-8 Emulator',
+      link: 'https://kothavade.com/gh/chip8-rs',
+      description: 'CHIP-8 emulator written in Rust.',
+    },
+    // {
+    //   name: 'kothavade.com',
+    //   link: 'https://kothavade.com/gh/site',
+    //   description: 'Personal website built with Astro, Vue and SolidJS',
+    // },
     {
       name: 'LectureAI',
       link: 'https://kothavade.com/gh/LectureAI',
       description: 'React/FastAPI lecture player, transcriber, and summarizer.',
-    },
-    {
-      name: 'chip8-rs',
-      link: 'https://kothavade.com/gh/chip8-rs',
-      description: 'CHIP-8 emulator written in Rust.',
     },
     {
       name: 'frostbite',
